@@ -14,6 +14,9 @@ self.addEventListener('install', event => {
       .then(cache => {
         return cache.addAll(resourcesToPrecache)
       })
+      .catch(error => {
+        console.log('Error caching files:', error)
+      })
   )
 })
 
