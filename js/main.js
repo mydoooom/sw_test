@@ -7,7 +7,7 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     // Registering our SW
     navigator.serviceWorker
-      .register("sw_cached_site.js")
+      .register("../sw_cached_site.js")
       .then((registration) => console.log("Service worker registered", registration))
       .catch((error) => console.log(`Service worker error: ${error}`));
   })
