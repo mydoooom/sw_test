@@ -10,11 +10,11 @@ if ('serviceWorker' in navigator) {
     registration.addEventListener('updatefound', () => {
       newWorker = registration.installing;
       newWorker.addEventListener('statechange', () => {
-        // When the service worker is installed, show the prompt
+
         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
           const updatePrompt = confirm('New version available! Click OK to update.');
           if (updatePrompt) {
-            newWorker.postMessage({ type: 'SKIP_WAITING' })
+            newWorker.skipWaiting()
               .then(() => window.location.reload())
               .catch(err => console.error('Error during update:', err));
           }
@@ -24,11 +24,11 @@ if ('serviceWorker' in navigator) {
   });
 
   // Detect controller change and reload page
-  let refreshing = false;
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!refreshing) {
-      refreshing = true;
-      window.location.reload();
-    }
-  });
+  // let refreshing = false;
+  // navigator.serviceWorker.addEventListener('controllerchange', () => {
+  //   if (!refreshing) {
+  //     refreshing = true;
+  //     window.location.reload();
+  //   }
+  // });
 }
