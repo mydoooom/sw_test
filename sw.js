@@ -1,4 +1,4 @@
-const cacheName = 'cache-v6'
+const cacheName = 'cache-v7'
 const resourcesToPrecache = [
   '/sw_test/',
   '/sw_test/index.html',
@@ -40,3 +40,9 @@ self.addEventListener('fetch', event => {
       })
   )
 })
+
+self.addEventListener('message', event => {
+  if (event.data.type === 'SKIP_WAITING') {
+    return self.skipWaiting();
+  }
+});
