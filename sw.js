@@ -1,4 +1,4 @@
-const cacheName = 'cache-v13'
+const cacheName = 'cache-v14'
 const resourcesToPrecache = [
   '/sw_test/',
   '/sw_test/index.html',
@@ -7,8 +7,6 @@ const resourcesToPrecache = [
 ]
 
 self.addEventListener('install', event => {
-  console.log('Install event!')
-
   event.waitUntil(
     caches.open(cacheName)
       .then(cache => {
@@ -21,7 +19,6 @@ self.addEventListener('install', event => {
 })
 
 self.addEventListener('activate', event => {
-  console.log('Activate event!')
   event.waitUntil(caches.keys().then(keys => {
     return Promise.all(keys
       .filter(key => key !== cacheName)
@@ -31,8 +28,6 @@ self.addEventListener('activate', event => {
 })
 
 self.addEventListener('fetch', event => {
-  console.log('Fetch intercepted for:', event.request.url)
-
   event.respondWith(
     caches.match(event.request)
       .then(cachedResponse => {
