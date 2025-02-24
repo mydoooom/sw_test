@@ -12,21 +12,19 @@ if ('serviceWorker' in navigator) {
         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
           const updatePrompt = confirm('New version available! Click OK to update.');
           if (updatePrompt) {
-            newWorker.skipWaiting()
-              .then(() => window.location.reload())
-              .catch(err => console.error('Error during update:', err));
+            newWorker.postMessage({ type: 'skipWaiting' })
+
           }
         }
       });
     });
   });
 
-  // Detect controller change and reload page
-  // let refreshing = false;
-  // navigator.serviceWorker.addEventListener('controllerchange', () => {
-  //   if (!refreshing) {
-  //     refreshing = true;
-  //     window.location.reload();
-  //   }
-  // });
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) {
+      refreshing = true;
+      window.location.reload();
+    }
+  });
 }
