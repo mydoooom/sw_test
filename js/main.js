@@ -13,7 +13,6 @@ if ('serviceWorker' in navigator) {
           const updatePrompt = confirm('New version available! Click OK to update.');
           if (updatePrompt) {
             newWorker.postMessage({ type: 'skipWaiting' })
-
           }
         }
       });
