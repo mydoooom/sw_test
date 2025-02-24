@@ -1,4 +1,4 @@
-const cacheName = 'cache-v5'
+const cacheName = 'cache-v6'
 const resourcesToPrecache = [
   '/sw_test/',
   '/sw_test/index.html',
