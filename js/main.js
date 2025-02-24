@@ -14,8 +14,9 @@ if ('serviceWorker' in navigator) {
         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
           const updatePrompt = confirm('New version available! Click OK to update.');
           if (updatePrompt) {
-            newWorker.postMessage({ type: 'SKIP_WAITING' });
-            window.location.reload();
+            newWorker.postMessage({ type: 'SKIP_WAITING' })
+              .then(() => window.location.reload())
+              .catch(err => console.error('Error during update:', err));
           }
         }
       });
